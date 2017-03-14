@@ -8,16 +8,27 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar">
-          <div className="menu-item menu-item-active">
-            <div className="img"> <img src={effectsIcon} alt="effects"></img></div>
-            <span>Effects</span>
+        <div className="topbar">
+          <div className="left navbar-container">
+            <button type="button"> Upload </button>
           </div>
-          <div className="menu-item">
-            <div className="img"> <img src={filtersIcon} alt="effects"></img></div>
-            <span>Filters</span>
+
+          <div className="middle navbar-container">
+            <div className="menu-item menu-item-active">
+              <img src={effectsIcon} alt="effects"></img>
+              <span>Effects</span>
+            </div>
+            <div className="menu-item menu-item-disabled">
+              <img src={filtersIcon} alt="effects"></img>
+              <span>Filters</span>
+            </div>
           </div>
-        </nav>
+
+          <div className="right navbar-container">
+            <button type="button"> Download </button>
+          </div>
+        </div>
+
         <Toolbar></Toolbar>
       </div>
     );
