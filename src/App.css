@@ -1,0 +1,21 @@
+body {
+  background-color: #434656;
+}
+
+.navbar {
+  margin: auto;
+  text-align: center;
+  box-shadow: 0px 2px 6px #000000;
+}
+
+.menu-item {
+  display: inline-block;
+  width: 5%;
+  margin: 2em;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+
+.menu-item-active {
+  color: #11FFFF;
+}

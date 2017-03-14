@@ -1,0 +1,16 @@
+.toolbar {
+  width: 100%;
+  height: 0px;
+  margin-top: 1em;
+  text-align: center;
+}
+
+.toolbar-item {
+  /*height: 200px;
+  transition: all 1s ease;*/
+  color: #FFFFFF;
+  font-size: 1.5em;
+  cursor: pointer;
+  width: 5%;
+  margin: 2em;
+}
