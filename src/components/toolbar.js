@@ -1,5 +1,7 @@
+
 import React, { Component } from 'react';
 import '../css/Toolbar.css';
+import '../css/Popover.css';
 
 class Toolbar extends Component {
   constructor(props) {
@@ -16,9 +18,13 @@ class Toolbar extends Component {
         <div className="toolbar-item">
           <a href="#" onClick={this.toggleActive}>Mosaic</a>
           <div className={this.state.active? "popover popover-active": "popover"}>
-            <div className="inputContainer"><label>Width:</label> <input type="number" min="1"></input></div>
-          <div className="inputContainer"><label>Height:</label> <input type="number" min="1"></input></div>
-          <div><button>Go</button></div>
+            <div className="inputContainer">
+              <label>Width:</label> <input type="number" min="1"></input>
+            </div>
+            <div className="inputContainer">
+              <label>Height:</label> <input type="number" min="1"></input>
+            </div>
+            <button>Go</button>
           </div>
         </div>
         <div className="toolbar-item">Retro</div>

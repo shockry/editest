@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import filtersIcon from './icons/filtersIcon.svg';
 import effectsIcon from './icons/effectsIcon.svg';
 import './App.css';
-import Toolbar from './components/toolbar'
+import Toolbar from './components/Toolbar';
 
 class App extends Component {
   constructor(props) {
