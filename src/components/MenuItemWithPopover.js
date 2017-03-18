@@ -3,28 +3,17 @@ import React, { Component } from 'react';
 import '../css/Popover.css';
 
 class MenuItemWithPopover extends Component {
-  constructor(props) {
-   super(props);
 
-   this.state = {active: false};
-
-   this.toggleActive = this.toggleActive.bind(this);
- }
 
   render() {
     return (
-      <div className="toolbar-item">
-        <a href="#" onClick={this.toggleActive}>{this.props.label}</a>
-        <div className={this.state.active? "popover popover-active": "popover"}>
+      <div className="toolbar-item" onClick={this.props.onClick} id={this.props.id}>
+        {this.props.label}
+        <div className={this.props.active? "popover popover-active": "popover"}>
           {this.props.children}
         </div>
       </div>
     );
-  }
-
-  toggleActive(e) {
-    e.preventDefault();
-    this.setState(prevState => ({active: !prevState.active}));
   }
 
 }
