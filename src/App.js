@@ -43,7 +43,7 @@ class App extends Component {
           </div>
         </div>
 
-        <Toolbar></Toolbar>
+        <Toolbar/>
         <div className="preview">
           <canvas className="drawingArea"
                   ref={canvas => {this.canvas = canvas;}}>
