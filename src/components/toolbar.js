@@ -7,15 +7,13 @@ class Toolbar extends Component {
    super(props);
 
    this.state = {active: null};
-
-   this.toggleActive = this.toggleActive.bind(this);
  }
 
   render() {
     return (
-      <div className="toolbar" onClick={this.toggleActive}>
-        <MenuItemWithPopover label="Mosaic" id="0"
-          active={this.state.active === "0"} onClick={this.toggleActive}>
+      <div className="toolbar">
+        <MenuItemWithPopover label="Mosaic"
+          active={this.state.active === 0} onClick={(e) => this.toggleActive(e, 0)}>
           <div className="inputContainer">
             <label>Width</label> <input type="number" min="1"/>
           </div>
@@ -24,8 +22,8 @@ class Toolbar extends Component {
           </div>
           <button>Go</button>
         </MenuItemWithPopover>
-        <MenuItemWithPopover label="Retro" id="1"
-          active={this.state.active === "1"} onClick={this.toggleActive}>
+        <MenuItemWithPopover label="Retro"
+          active={this.state.active === 1} onClick={(e) => this.toggleActive(e, 1)}>
           <div className="inputContainer">
             <label>Intensity</label> <input type="range" min="1"/>
           </div>
@@ -35,11 +33,11 @@ class Toolbar extends Component {
     );
   }
 
-  toggleActive(e) {
-    e.persist();
-    e.stopPropagation();
+  toggleActive(e, i) {
     this.setState((prevState) =>
-                  ({active: prevState.active === e.target.id? null: e.target.id}));
+                  ({active: prevState.active === i? null: i}));
+    e.stopPropagation();
+    e.preventDefault();
   }
 
 }
