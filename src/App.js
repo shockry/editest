@@ -8,6 +8,8 @@ class App extends Component {
   constructor(props) {
    super(props);
 
+   this.state = {canvas: null};
+
    this.triggerUpload = this.triggerUpload.bind(this);
    this.drawImage = this.drawImage.bind(this);
    // refs
@@ -43,7 +45,7 @@ class App extends Component {
           </div>
         </div>
 
-        <Toolbar/>
+        <Toolbar canvas={this.state.canvas}/>
         <div className="preview">
           <canvas className="drawingArea"
                   ref={canvas => {this.canvas = canvas;}}>
@@ -74,6 +76,8 @@ class App extends Component {
         canvas.height = img.naturalHeight;
         canvas.getContext('2d').drawImage(this, 0, 0);
       };
+
+      this.setState({canvas});
     }
   }
 
