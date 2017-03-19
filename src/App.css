@@ -55,7 +55,7 @@ button {
 
 @media (max-width: 690px) {
   button {
-    padding: 3px 3px;
+    padding: 8px 5px;
     font-size: 0.6em;
   }
   .menu-item {

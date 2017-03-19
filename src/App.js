@@ -13,9 +13,11 @@ class App extends Component {
 
    this.triggerUpload = this.triggerUpload.bind(this);
    this.drawImage = this.drawImage.bind(this);
+   this.downloadImage = this.downloadImage.bind(this);
    // refs
    this.imageInput = null;
    this.canvas = null;
+   this.imagedownloader = null;
  }
   render() {
     return (
@@ -42,7 +44,8 @@ class App extends Component {
           </div>
 
           <div className="right navbar-container">
-            <button type="button"> Download </button>
+            <a className="hiddenInput" ref={input => {this.imagedownloader = input;}}/>
+            <button type="button" onClick={this.downloadImage}> Download </button>
           </div>
         </div>
 
@@ -81,6 +84,15 @@ class App extends Component {
       };
 
       this.setState({canvas});
+    }
+  }
+
+  downloadImage(e) {
+    if (this.state.canvas) {
+      const data = this.canvas.toDataURL();
+      this.imagedownloader.href = data;
+      this.imagedownloader.download = "bestest image";
+      this.imagedownloader.click();
     }
   }
 
