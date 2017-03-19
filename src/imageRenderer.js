@@ -1,10 +1,14 @@
 import imageHelper from './utils/imageHelper';
-import {TILE_WIDTH, TILE_HEIGHT, canvas as resultCanvas} from './sharedVars';
+import { shared } from './sharedVars';
 
+
+let TILE_WIDTH, TILE_HEIGHT, resultCanvas;
 let renderingRow;
 
 function renderImage(mosaicData, width, height) {
   renderingRow = 0;
+  [TILE_WIDTH, TILE_HEIGHT, resultCanvas] =
+    [shared.TILE_WIDTH, shared.TILE_HEIGHT, shared.canvas]
   // console.log(TILE_WIDTH, TILE_HEIGHT, width, height);
   // This is where the image is going to be drawn on the page
   resultCanvas.width = width;

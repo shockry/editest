@@ -1,5 +1,5 @@
-export let TILE_WIDTH, TILE_HEIGHT, canvas;
+export const shared = {TILE_WIDTH: null, TILE_HEIGHT: null, canvas: null, originalImage: null};
 
 export function setVars(vals) {
-  [TILE_WIDTH, TILE_HEIGHT, canvas] = [vals.TILE_WIDTH, vals.TILE_HEIGHT, vals.canvas];
+  Object.assign(shared, vals);
 }

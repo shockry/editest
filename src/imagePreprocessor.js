@@ -1,9 +1,20 @@
 import workerFactory from './utils/workerFactory';
 import imageRenderer from './imageRenderer';
-import {TILE_WIDTH, TILE_HEIGHT, canvas} from './sharedVars';
+import { shared } from './sharedVars';
+
+
+let TILE_WIDTH, TILE_HEIGHT, originalImage;
 
 function processImage() {
+  [TILE_WIDTH, TILE_HEIGHT, originalImage] =
+    [shared.TILE_WIDTH, shared.TILE_HEIGHT, shared.originalImage];
+
+  const canvas = document.createElement('canvas');
+  canvas.width = originalImage.naturalWidth;
+  canvas.height = originalImage.naturalHeight;
+
   const ctx = canvas.getContext('2d');
+  ctx.drawImage(originalImage, 0, 0);
 
   const parts = sliceIntoParts(canvas.width, canvas.height);
 

@@ -3,6 +3,7 @@ import filtersIcon from './icons/filtersIcon.svg';
 import effectsIcon from './icons/effectsIcon.svg';
 import './App.css';
 import Toolbar from './components/Toolbar';
+import {setVars} from './sharedVars';
 
 class App extends Component {
   constructor(props) {
@@ -75,6 +76,8 @@ class App extends Component {
         canvas.width = img.naturalWidth;
         canvas.height = img.naturalHeight;
         canvas.getContext('2d').drawImage(this, 0, 0);
+
+        setVars({originalImage: this});
       };
 
       this.setState({canvas});
