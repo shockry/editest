@@ -4,10 +4,13 @@ import { shared } from './sharedVars';
 
 
 let TILE_WIDTH, TILE_HEIGHT, originalImage;
+let effect;
 
-function processImage() {
+function processImage(effectType) {
   [TILE_WIDTH, TILE_HEIGHT, originalImage] =
     [shared.TILE_WIDTH, shared.TILE_HEIGHT, shared.originalImage];
+
+  effect = effectType;
 
   const canvas = document.createElement('canvas');
   canvas.width = originalImage.naturalWidth;
@@ -95,7 +98,7 @@ function makeMessageHandler(mosaicData={}, partsLeft, imageWidth, imageHeight) {
     Object.assign(mosaicData, e.data);
     partsLeft--;
     if (partsLeft === 0) { // When all workers have finished, start drawing
-      return imageRenderer.renderImage(mosaicData, imageWidth, imageHeight);
+      return imageRenderer.renderImage(mosaicData, imageWidth, imageHeight, effect);
     }
   }
 }

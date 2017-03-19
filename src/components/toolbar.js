@@ -9,12 +9,13 @@ class Toolbar extends Component {
    super(props);
 
    this.handleInput = this.handleInput.bind(this);
-   this.photoMosaic = this.photoMosaic.bind(this);
+   this.handleImageEffects = this.handleImageEffects.bind(this);
 
    this.state = {
      active: null,
      tileWidth: 10,
-     tileHeight: 10
+     tileHeight: 10,
+     retrosize: 5
    };
  }
 
@@ -26,21 +27,25 @@ class Toolbar extends Component {
           <div className="inputContainer">
             <label>Width</label>
             <input value={this.state.tileWidth} type="number" min="1"
-                  name="tileWidth" onChange={this.handleInput}/>
+                   inputMode="numeric" name="tileWidth" onChange={this.handleInput}/>
           </div>
           <div className="inputContainer">
             <label>Height</label>
             <input value={this.state.tileHeight} type="number" min="1"
                   name="tileHeight" onChange={this.handleInput}/>
           </div>
-          <button onClick={this.photoMosaic}>Go</button>
+          <button name="mosaic" onClick={this.handleImageEffects}>Go</button>
         </MenuItemWithPopover>
+
         <MenuItemWithPopover label="Retro"
           active={this.state.active === 1} onClick={(e) => this.toggleActive(e, 1)}>
           <div className="inputContainer">
-            <label>Intensity</label> <input type="range" min="1"/>
+            <label>Intensity</label>
+            <input type="range" name="retrosize" value={this.state.retrosize}
+                   onChange={this.handleInput} min="5"/>
+                 <label className="numberViewer">{this.state.retrosize}</label>
           </div>
-          <button>Go</button>
+          <button name="retro" onClick={this.handleImageEffects}>Go</button>
         </MenuItemWithPopover>
       </div>
     );
@@ -59,12 +64,29 @@ class Toolbar extends Component {
     this.setState({[name]: value});
   }
 
-  photoMosaic(e) {
+  handleImageEffects(e) {
     if (this.props.canvas) {
       this.setState({active: null});
-      setVars({TILE_WIDTH: this.state.tileWidth, TILE_HEIGHT: this.state.tileHeight,
-               canvas: this.props.canvas});
-      imagePreprocessor.processImage();
+
+      switch (e.target.name) {
+        case "mosaic":
+          setVars({TILE_WIDTH: this.state.tileWidth,
+                   TILE_HEIGHT: this.state.tileHeight,
+                   canvas: this.props.canvas});
+          break;
+
+        case "retro":
+          setVars({TILE_WIDTH: this.state.retrosize,
+                   TILE_HEIGHT: this.state.retrosize,
+                   canvas: this.props.canvas});
+          break;
+
+        default:
+          console.log("noop");
+      }
+
+      const effectType = e.target.name;
+      imagePreprocessor.processImage(effectType);
     }
   }
 }

@@ -19,3 +19,7 @@ a {
   color: #FFFFFF;
   text-decoration: none;
 }
+
+.numberViewer {
+  width: 2em;
+}

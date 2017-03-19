@@ -4,12 +4,14 @@ import { shared } from './sharedVars';
 
 let TILE_WIDTH, TILE_HEIGHT, resultCanvas;
 let renderingRow;
+let effect;
 
-function renderImage(mosaicData, width, height) {
+function renderImage(mosaicData, width, height, effectType) {
   renderingRow = 0;
   [TILE_WIDTH, TILE_HEIGHT, resultCanvas] =
     [shared.TILE_WIDTH, shared.TILE_HEIGHT, shared.canvas]
-  // console.log(TILE_WIDTH, TILE_HEIGHT, width, height);
+  effect = effectType;
+
   // This is where the image is going to be drawn on the page
   resultCanvas.width = width;
   resultCanvas.height = height;
@@ -22,11 +24,8 @@ function renderImage(mosaicData, width, height) {
   tmpCanvas.height = TILE_HEIGHT;
   const tmpContext = tmpCanvas.getContext('2d');
 
-  // Each tile is assigned to this image then rendered to the temporary canvas
-  const img = new Image();
-
   const renderRows = renderTileRows(mosaicData, height, tmpContext,
-                                    resultContext, img);
+                                    resultContext);
   return renderRows;
 }
 
@@ -35,11 +34,11 @@ function renderImage(mosaicData, width, height) {
  * Draws tile rows to the canvas, one at a time
  * returns a promise that resolves to true when all rows are rendered
  */
-function renderTileRows(data, height, tmpCtx, resultCtx, img) {
+function renderTileRows(data, height, tmpCtx, resultCtx) {
     const tiles = data[renderingRow];
 
     for (let i=0; i<tiles.length; i++) {
-      drawTile(tiles[i].color, tiles[i].col, 0, tmpCtx, img);
+      drawTile(tiles[i].color, tiles[i].col, 0, tmpCtx);
     }
 
     renderRow(tmpCtx.canvas, resultCtx, tmpCtx, renderingRow);
@@ -50,8 +49,7 @@ function renderTileRows(data, height, tmpCtx, resultCtx, img) {
       return ({tmpCtx, resultCtx});
     }
 
-    window.requestAnimationFrame(()=>renderTileRows(data, height, tmpCtx,
-                          resultCtx, img));
+    window.requestAnimationFrame(()=>renderTileRows(data, height, tmpCtx, resultCtx));
 }
 
 
@@ -66,13 +64,32 @@ function renderRow(tmpCanvas, resultCtx, tmpCtx, row, col=0) {
 
 
 // Draws a tile to the temporary canvas
-function drawTile(color, col, row, tmpCtx, imgObj) {
+function drawTile(color, col, row, tmpCtx) {
   tmpCtx.fillStyle = "#"+imageHelper.rgbToHex(color);
-  // tmpCtx.fillRect(col, row, TILE_WIDTH, TILE_HEIGHT);
+
+  switch (effect) {
+    case "mosaic":
+      drawEllipses(color, col, row, tmpCtx);
+      break;
+
+    case "retro":
+      drawRectangles(color, col, row, tmpCtx);
+      break;
+
+    default:
+      console.log("noop");
+  }
+}
+
+function drawEllipses(color, col, row, tmpCtx) {
   tmpCtx.beginPath();
   tmpCtx.ellipse(col+(TILE_WIDTH/2), row+(TILE_HEIGHT/2), TILE_WIDTH/2, TILE_HEIGHT/2, 0, 0, Math.PI*2);
   tmpCtx.closePath();
   tmpCtx.fill();
+}
+
+function drawRectangles(color, col, row, tmpCtx) {
+  tmpCtx.fillRect(col, row, TILE_WIDTH, TILE_HEIGHT);
 }
 
 export default {
