@@ -24,7 +24,7 @@ class MainNavbar extends Component {
       icon: filtersIcon,
       alt: "filters",
       label: "Filters",
-      disabled: true
+      disabled: false
       }
     ];
 
@@ -34,7 +34,7 @@ class MainNavbar extends Component {
                         icon={item.icon} alt={item.alt}
                         label={item.label} currentItem={this.state.currentItem}
                         key={item.label}
-                        onClick={(e) => this.activateMenu.bind(this, e, item)}/>
+                        onClick={(e) => this.activateMenu(e, item)}/>
     });
 
     return (
