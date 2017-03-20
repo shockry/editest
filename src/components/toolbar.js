@@ -20,33 +20,42 @@ class Toolbar extends Component {
  }
 
   render() {
+    let menu;
+    if (this.props.active === "Effects") {
+      menu = (
+        <div>
+          <MenuItemWithPopover label="Mosaic"
+            active={this.state.active === 0} onClick={(e) => this.toggleActive(e, 0)}>
+            <div className="inputContainer">
+              <label>Width</label>
+              <input value={this.state.tileWidth} type="number" min="1"
+                     inputMode="numeric" name="tileWidth" onChange={this.handleInput}/>
+            </div>
+            <div className="inputContainer">
+              <label>Height</label>
+              <input value={this.state.tileHeight} type="number" min="1"
+                    name="tileHeight" onChange={this.handleInput}/>
+            </div>
+            <button name="mosaic" onClick={this.handleImageEffects}>Go</button>
+          </MenuItemWithPopover>
+
+          <MenuItemWithPopover label="Retro"
+            active={this.state.active === 1} onClick={(e) => this.toggleActive(e, 1)}>
+            <div className="inputContainer">
+              <label>Intensity</label>
+              <input type="range" name="retrosize" value={this.state.retrosize}
+                     onChange={this.handleInput} min="5"/>
+                   <label className="numberViewer">{this.state.retrosize}</label>
+            </div>
+            <button name="retro" onClick={this.handleImageEffects}>Go</button>
+          </MenuItemWithPopover>
+        </div>
+      );
+    }
+
     return (
       <div className="toolbar">
-        <MenuItemWithPopover label="Mosaic"
-          active={this.state.active === 0} onClick={(e) => this.toggleActive(e, 0)}>
-          <div className="inputContainer">
-            <label>Width</label>
-            <input value={this.state.tileWidth} type="number" min="1"
-                   inputMode="numeric" name="tileWidth" onChange={this.handleInput}/>
-          </div>
-          <div className="inputContainer">
-            <label>Height</label>
-            <input value={this.state.tileHeight} type="number" min="1"
-                  name="tileHeight" onChange={this.handleInput}/>
-          </div>
-          <button name="mosaic" onClick={this.handleImageEffects}>Go</button>
-        </MenuItemWithPopover>
-
-        <MenuItemWithPopover label="Retro"
-          active={this.state.active === 1} onClick={(e) => this.toggleActive(e, 1)}>
-          <div className="inputContainer">
-            <label>Intensity</label>
-            <input type="range" name="retrosize" value={this.state.retrosize}
-                   onChange={this.handleInput} min="5"/>
-                 <label className="numberViewer">{this.state.retrosize}</label>
-          </div>
-          <button name="retro" onClick={this.handleImageEffects}>Go</button>
-        </MenuItemWithPopover>
+        {menu}
       </div>
     );
   }
@@ -65,7 +74,7 @@ class Toolbar extends Component {
   }
 
   handleImageEffects(e) {
-    if (this.props.canvas) {
+    if (this.props.canvas.hasImage) {
       this.setState({active: null});
 
       switch (e.target.name) {

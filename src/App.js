@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Toolbar from './components/Toolbar';
 import Topbar from './components/Topbar';
 
 class App extends Component {
@@ -20,8 +19,6 @@ class App extends Component {
     return (
       <div>
         <Topbar className="topbar" canvas={this.state.canvas}/>
-
-        <Toolbar canvas={this.state.canvas}/>
         <div className="preview">
           <canvas className="drawingArea"
                   ref={canvas => {this.canvas = canvas;}}>

@@ -8,8 +8,8 @@ class Topbar extends Component {
     return (
       <div className="topbar">
         <UploadButton canvas={this.props.canvas}/>
-        <MainNavbar/>
         <DownloadButton canvas={this.props.canvas}/>
+        <MainNavbar canvas={this.props.canvas}/>
       </div>
     );
   }
