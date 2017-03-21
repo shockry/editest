@@ -31,7 +31,8 @@ class MainNavbar extends Component {
 
     const menu = menuItems.map((item) => {
       return <MenuItemIconAbove
-                        className={item.disabled?"menu-item-disabled": "menu-item-active"}
+                        className={item.disabled? "menu-item-disabled":
+                          this.state.currentItem === item.label? "menu-item-active": ""}
                         icon={item.icon} alt={item.alt}
                         label={item.label} currentItem={this.state.currentItem}
                         key={item.label}
