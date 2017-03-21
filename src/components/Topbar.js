@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../css/Topbar.css';
 import UploadButton from './UploadButton';
 import DownloadButton from './DownloadButton';
 import MainNavbar from './MainNavbar';

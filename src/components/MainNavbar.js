@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import filtersIcon from '../icons/filtersIcon.svg';
 import effectsIcon from '../icons/effectsIcon.svg';
+import '../css/MainNavbar.css';
 import MenuItemIconAbove from './MenuItemIconAbove';
 import Toolbar from './Toolbar';
 
@@ -24,7 +25,7 @@ class MainNavbar extends Component {
       icon: filtersIcon,
       alt: "filters",
       label: "Filters",
-      disabled: false
+      disabled: true
       }
     ];
 

@@ -1,0 +1,19 @@
+.navbar-container {
+  display: inline-block;
+  margin-top: 1em;
+}
+
+.left {
+  width: 20%;
+  float: left;
+}
+
+.middle {
+  width: 59%;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.right {
+  float: right;
+}

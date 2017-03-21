@@ -1,0 +1,22 @@
+.menu-item {
+  display: inline-block;
+  width: 5%;
+  margin: 0em 2em;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+
+.menu-item-active {
+  color: #11FFFF;
+}
+
+.menu-item-disabled {
+  color: #888888;
+  cursor: default;;
+}
+
+@media (max-width: 690px) {
+  .menu-item {
+    width: 2%;
+  }
+}
