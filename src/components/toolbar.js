@@ -10,12 +10,14 @@ class Toolbar extends Component {
 
    this.handleInput = this.handleInput.bind(this);
    this.handleImageEffects = this.handleImageEffects.bind(this);
+   this.updateTileDimensions = this.updateTileDimensions.bind(this);
 
    this.state = {
      active: null,
      tileWidth: 10,
      tileHeight: 10,
-     retrosize: 5
+     retrosize: 5,
+     sync: true
    };
  }
 
@@ -26,17 +28,27 @@ class Toolbar extends Component {
         under: "Effects",
         content:
         <div>
-          <div className="inputContainer">
-            <label>Width</label>
-            <input value={this.state.tileWidth} type="number" min="1"
-                   inputMode="numeric" name="tileWidth" onChange={this.handleInput}/>
+          <div className="popoverContainer">
+            <div className="labelContainer">
+              <label className="popoverControl">Width</label>
+              <label className="popoverControl">Height</label>
+              <label htmlFor="sync" className="popoverControl">Sync</label>
+            </div>
+
+            <div className="inputContainer">
+              <input value={this.state.tileWidth} type="number" min="1"
+                     className="popoverControl"
+                     inputMode="numeric" name="tileWidth" onChange={this.updateTileDimensions}/>
+              <input value={this.state.tileHeight} type="number" min="1"
+                     className="popoverControl"
+                     name="tileHeight" onChange={this.updateTileDimensions}/>
+
+                   <input className="popoverControl" checked={this.state.sync}
+                     type="checkbox" name="sync" id="sync"
+                     onChange={this.handleInput}/>
+            </div>
           </div>
-          <div className="inputContainer">
-            <label>Height</label>
-            <input value={this.state.tileHeight} type="number" min="1"
-                  name="tileHeight" onChange={this.handleInput}/>
-          </div>
-          <button name="mosaic" onClick={this.handleImageEffects}>Go</button>
+            <button name="mosaic" onClick={this.handleImageEffects}>Go</button>
         </div>
       },
       {
@@ -44,7 +56,7 @@ class Toolbar extends Component {
         under: "Effects",
         content:
         <div>
-          <div className="inputContainer">
+          <div className="popoverContainer">
           <label>Intensity</label>
           <input type="range" name="retrosize" value={this.state.retrosize}
                  onChange={this.handleInput} min="5"/>
@@ -79,8 +91,25 @@ class Toolbar extends Component {
     e.preventDefault();
   }
 
-  handleInput(e) {
+  updateTileDimensions(e) {
     const value = parseInt(e.target.value, 10);
+    const name = e.target.name;
+    this.setState((prevState) => {
+      if (prevState.sync) {
+        return {tileWidth: value, tileHeight: value};
+      } else {
+        return {[name]: value};
+      }
+    });
+  }
+
+  handleInput(e) {
+    let value;
+    if (e.target.type === "checkbox") {
+      value = e.target.checked;
+    } else {
+      value = parseInt(e.target.value, 10);
+    }
     const name = e.target.name;
     this.setState({[name]: value});
   }

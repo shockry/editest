@@ -41,9 +41,6 @@
   padding: 2px 30px;
 }
 
-.inputContainer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+.popoverControl {
   margin-bottom: 5px;
 }
