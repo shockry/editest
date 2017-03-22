@@ -23,21 +23,3 @@ a {
 .numberViewer {
   width: 2em;
 }
-
-.inputContainer, .labelContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.inputContainer {
-  justify-content: flex-start;
-}
-
-.labelContainer {
-  justify-content: flex-end;
-  align-items: flex-end;
-}
-
-.popoverContainer {
-  display: flex;
-}

@@ -41,6 +41,13 @@
   padding: 2px 30px;
 }
 
-.popoverControl {
+.popover-form > div {
+  display: flex;
+  align-items: flex-end;
   margin-bottom: 5px;
+}
+
+.popover-form-label {
+  flex-basis: 3em;
+  text-align: right;
 }

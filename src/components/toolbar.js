@@ -27,40 +27,36 @@ class Toolbar extends Component {
         label: "Mosaic",
         under: "Effects",
         content:
-        <div>
-          <div className="popoverContainer">
-            <div className="labelContainer">
-              <label className="popoverControl">Width</label>
-              <label className="popoverControl">Height</label>
-              <label htmlFor="sync" className="popoverControl">Sync</label>
-            </div>
-
-            <div className="inputContainer">
-              <input value={this.state.tileWidth} type="number" min="1"
-                     className="popoverControl"
-                     inputMode="numeric" name="tileWidth" onChange={this.updateTileDimensions}/>
-              <input value={this.state.tileHeight} type="number" min="1"
-                     className="popoverControl"
-                     name="tileHeight" onChange={this.updateTileDimensions}/>
-
-                   <input className="popoverControl" checked={this.state.sync}
-                     type="checkbox" name="sync" id="sync"
-                     onChange={this.handleInput}/>
-            </div>
+        <div className="popover-form">
+          <div>
+            <label className="popover-form-label">Width</label>
+            <input value={this.state.tileWidth} type="number" min="1"
+                   inputMode="numeric" name="tileWidth" onChange={this.updateTileDimensions}/>
           </div>
-            <button name="mosaic" onClick={this.handleImageEffects}>Go</button>
+          <div>
+            <label className="popover-form-label">Height</label>
+            <input value={this.state.tileHeight} type="number" min="1"
+                   name="tileHeight" onChange={this.updateTileDimensions}/>
+          </div>
+          <div>
+            <label htmlFor="sync" className="popover-form-label">Sync</label>
+            <input checked={this.state.sync}
+              type="checkbox" name="sync" id="sync"
+              onChange={this.handleInput}/>
+          </div>
+          <button name="mosaic" onClick={this.handleImageEffects}>Go</button>
         </div>
       },
       {
         label: "Retro",
         under: "Effects",
         content:
-        <div>
-          <div className="popoverContainer">
-          <label>Intensity</label>
-          <input type="range" name="retrosize" value={this.state.retrosize}
-                 onChange={this.handleInput} min="5"/>
-               <label className="numberViewer">{this.state.retrosize}</label>
+        <div className="popover-form">
+          <div>
+            <label className="popover-form-label">Intensity</label>
+            <input type="range" name="retrosize" value={this.state.retrosize}
+                   onChange={this.handleInput} min="5"/>
+            <label className="numberViewer">{this.state.retrosize}</label>
           </div>
           <button name="retro" onClick={this.handleImageEffects}>Go</button>
         </div>
