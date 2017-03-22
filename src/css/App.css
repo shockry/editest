@@ -12,6 +12,14 @@ button {
   margin: 0px 5px;
 }
 
+button:active {
+  box-shadow: inset 0px 0px 5px #333333;
+}
+
+button:hover {
+  background-color: #22CCFF;
+}
+
 @media (max-width: 690px) {
   button {
     padding: 8px 5px;

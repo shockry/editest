@@ -40,9 +40,8 @@ class Toolbar extends Component {
           </div>
           <div>
             <label htmlFor="sync" className="popover-form-label">Sync</label>
-            <input checked={this.state.sync}
-              type="checkbox" name="sync" id="sync"
-              onChange={this.handleInput}/>
+            <input checked={this.state.sync} type="checkbox"
+                   name="sync" id="sync" onChange={this.handleInput}/>
           </div>
           <button name="mosaic" onClick={this.handleImageEffects}>Go</button>
         </div>
