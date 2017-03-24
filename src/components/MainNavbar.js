@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import filtersIcon from '../icons/filtersIcon.svg';
 import effectsIcon from '../icons/effectsIcon.svg';
-import '../css/MainNavbar.css';
 import MenuItemIconAbove from './MenuItemIconAbove';
 import Toolbar from './Toolbar';
 
@@ -43,7 +42,7 @@ class MainNavbar extends Component {
 
     return (
       <div>
-        <div className="middle navbar-container">
+        <div className="middle">
           {menu}
         </div>
         <Toolbar canvas={this.props.canvas}

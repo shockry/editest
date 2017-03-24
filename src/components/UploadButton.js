@@ -13,7 +13,7 @@ class UploadButton extends Component {
  }
   render() {
     return (
-      <div className="left navbar-container">
+      <div className="left">
         <input className="hiddenInput" type="file"
                accept="image/*" id="image-picker"
                ref={input => {this.imageInput = input;}}

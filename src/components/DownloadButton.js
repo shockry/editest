@@ -11,7 +11,7 @@ class DownloadButton extends Component {
  }
   render() {
     return (
-      <div className="right navbar-container">
+      <div className="right">
         <a className="hiddenInput" ref={input => {this.imagedownloader = input;}}/>
         <button type="button" onClick={this.downloadImage}>
           <img className="button-icon" src={downloadIcon} alt="upload icon"/>
