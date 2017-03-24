@@ -44,7 +44,8 @@ class MainNavbar extends Component {
         <div className="middle navbar-container">
           {menu}
         </div>
-        <Toolbar canvas={this.props.canvas} active={this.state.currentItem}/>
+        <Toolbar canvas={this.props.canvas}
+          activeMainbarItem={this.state.currentItem}/>
       </div>
     );
   }

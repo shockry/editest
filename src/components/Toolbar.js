@@ -8,9 +8,10 @@ class Toolbar extends Component {
    super(props);
 
    this.toggleActive = this.toggleActive.bind(this);
+   this.dismissAll = this.dismissAll.bind(this);
 
    this.state = {
-     active: null
+     activeToolbarItem: null
    };
  }
 
@@ -18,11 +19,13 @@ class Toolbar extends Component {
     // Every type of toolbar is going into its own file with its
     // own functionality details
     const menuItems = {
-      Effects: <EffectsToolbar canvas={this.props.canvas} active={this.state.active}
-                               onClick={this.toggleActive}/>
+      Effects: <EffectsToolbar canvas={this.props.canvas}
+                               active={this.state.activeToolbarItem}
+                               onClick={this.toggleActive}
+                               hide={this.dismissAll}/>
     };
 
-    const menu = menuItems[this.props.active];
+    const menu = menuItems[this.props.activeMainbarItem];
 
     return (
       <div className="toolbar">
@@ -34,9 +37,14 @@ class Toolbar extends Component {
   toggleActive(e) {
     const item = e.target.dataset.label;
     this.setState((prevState) =>
-                  ({active: prevState.active === item? null: item}));
+                  ({activeToolbarItem: prevState.activeToolbarItem === item? null: item}));
     e.stopPropagation();
     e.preventDefault();
+  }
+
+  // Close all toolbar items
+  dismissAll() {
+    this.setState({activeToolbarItem: null});
   }
 
 }

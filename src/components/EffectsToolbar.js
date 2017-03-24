@@ -98,7 +98,7 @@ class EffectsToolbar extends Component {
 
  handleImageEffects(e) {
    if (this.props.canvas.hasImage) {
-     this.setState({active: null});
+     this.props.hide(); // Close popover
 
      switch (e.target.name) {
        case "mosaic":
