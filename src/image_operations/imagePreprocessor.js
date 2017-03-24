@@ -1,6 +1,6 @@
-import workerFactory from './utils/workerFactory';
+import workerFactory from '../utils/workerFactory';
 import imageRenderer from './imageRenderer';
-import { shared } from './sharedVars';
+import { shared } from '../utils/sharedVars';
 
 
 let TILE_WIDTH, TILE_HEIGHT, originalImage;

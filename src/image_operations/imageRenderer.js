@@ -1,5 +1,5 @@
-import imageHelper from './utils/imageHelper';
-import { shared } from './sharedVars';
+import imageHelper from '../utils/imageHelper';
+import { shared } from '../utils/sharedVars';
 
 
 let TILE_WIDTH, TILE_HEIGHT, resultCanvas;

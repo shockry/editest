@@ -10,6 +10,8 @@ class MainNavbar extends Component {
   constructor(props) {
    super(props);
 
+   this.activateMenu = this.activateMenu.bind(this);
+
    this.state = {currentItem: "Effects"};
  }
 
@@ -35,8 +37,8 @@ class MainNavbar extends Component {
                           this.state.currentItem === item.label? "menu-item-active": ""}
                         icon={item.icon} alt={item.alt}
                         label={item.label} currentItem={this.state.currentItem}
-                        key={item.label}
-                        onClick={(e) => this.activateMenu(e, item)}/>
+                        key={item.label} disabled={item.disabled}
+                        onClick={this.activateMenu}/>
     });
 
     return (
@@ -50,8 +52,9 @@ class MainNavbar extends Component {
     );
   }
 
-  activateMenu(e, item) {
-    if (!item.disabled) {
+  activateMenu(e) {
+    const item = e.target.dataset;
+    if (item.disabled === "false") {
       this.setState({currentItem: item.label});
     }
   }

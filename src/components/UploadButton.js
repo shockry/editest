@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {setVars} from '../sharedVars';
+import {setVars} from '../utils/sharedVars';
 
 class UploadButton extends Component {
   constructor(props) {
