@@ -25,6 +25,9 @@ button:hover {
     padding: 8px 5px;
     font-size: 0.6em;
   }
+  body {
+    font-size: 14px;
+  }
 }
 
 .hiddenInput {

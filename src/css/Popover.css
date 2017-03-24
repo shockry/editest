@@ -9,7 +9,7 @@
   opacity: 0;
   transition: all 0.3s;
   box-shadow: 1px 1px 6px #000000;
-  z-index: -1;
+  z-index: 0;
 }
 
 .popover:before {
@@ -50,4 +50,10 @@
 .popover-form-label {
   flex-basis: 3em;
   text-align: right;
+}
+
+@media (max-width: 690px) {
+  .popover button {
+    padding: 5px 30px;
+  }
 }
