@@ -5,7 +5,8 @@ class MenuItemWithPopover extends Component {
   render() {
     return (
       <div className="toolbar-item">
-        <a href="#" onClick={this.props.onClick}>{this.props.label}</a>
+        <a href="#" data-label={this.props.label}
+           onClick={this.props.onClick}>{this.props.label}</a>
         <div className={this.props.active? "popover popover-active": "popover"}>
           {this.props.children}
         </div>
