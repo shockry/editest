@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {setVars} from '../utils/sharedVars';
+import uploadIcon from '../icons/uploadIcon.svg';
 
 class UploadButton extends Component {
   constructor(props) {
@@ -18,7 +19,10 @@ class UploadButton extends Component {
                ref={input => {this.imageInput = input;}}
                onChange={this.drawImage}>
         </input>
-        <button type="button" onClick={this.triggerUpload}> Upload </button>
+        <button type="button" onClick={this.triggerUpload}>
+          <img className="button-icon" src={uploadIcon} alt="upload icon"/>
+          <span className="button-text">Upload</span>
+        </button>
       </div>
     );
   }

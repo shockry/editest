@@ -20,11 +20,24 @@ button:hover {
   background-color: #22CCFF;
 }
 
+button > .button-icon {
+  display: none;
+}
+
 @media (max-width: 690px) {
   button {
     padding: 8px 5px;
     font-size: 0.6em;
   }
+
+  button > .button-text {
+    display: none;
+  }
+
+  button > .button-icon {
+    display: inline;
+  }
+
   body {
     font-size: 14px;
   }

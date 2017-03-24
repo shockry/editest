@@ -1,6 +1,5 @@
 .menu-item {
   display: inline-block;
-  width: 5%;
   margin: 0em 2em;
   cursor: pointer;
   color: #FFFFFF;
@@ -15,8 +14,12 @@
   cursor: default;;
 }
 
+.menu-item-icon {
+  display: block;
+}
+
 @media (max-width: 690px) {
   .menu-item {
-    width: 2%;
+    margin: 0em 1em;
   }
 }

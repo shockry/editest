@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import downloadIcon from '../icons/downloadIcon.svg';
 
 class DownloadButton extends Component {
   constructor(props) {
@@ -12,7 +13,10 @@ class DownloadButton extends Component {
     return (
       <div className="right navbar-container">
         <a className="hiddenInput" ref={input => {this.imagedownloader = input;}}/>
-        <button type="button" onClick={this.downloadImage}> Download </button>
+        <button type="button" onClick={this.downloadImage}>
+          <img className="button-icon" src={downloadIcon} alt="upload icon"/>
+          <span className="button-text">Download</span>
+        </button>
       </div>
     );
   }
