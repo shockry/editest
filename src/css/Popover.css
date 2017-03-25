@@ -37,10 +37,6 @@
   border: 1px solid #dad8d8;
 }
 
-.popover button {
-  padding: 2px 30px;
-}
-
 .popover-form > div {
   display: flex;
   align-items: flex-end;
@@ -50,6 +46,10 @@
 .popover-form-label {
   flex-basis: 3em;
   text-align: right;
+}
+
+.popover button {
+  padding: 2px 30px;
 }
 
 @media (max-width: 690px) {
