@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MenuItemWithPopover from './MenuItemWithPopover';
-import imagePreprocessor from '../image_operations/imagePreprocessor';
-import {setVars} from '../utils/sharedVars';
+import imagePreprocessor from '../image_operations/effects/imagePreprocessor';
+import { setVars } from '../utils/sharedVars';
 
 
 class EffectsToolbar extends Component {
