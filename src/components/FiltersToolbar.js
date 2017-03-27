@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import imageProcessor from '../image_operations/filters/imageProcessor';
-import {setVars} from '../utils/sharedVars';
 
 
 class FiltersToolbar extends Component {
@@ -9,12 +8,9 @@ class FiltersToolbar extends Component {
 
    this.handleImageFilters = this.handleImageFilters.bind(this);
 
-  //  this.state = {
-  //    tileWidth: 10,
-  //    tileHeight: 10,
-  //    retrosize: 5,
-  //    sync: true
-  //  };
+   this.state = {
+     activeFilter: null
+   }
  }
 
  render() {
@@ -31,7 +27,9 @@ class FiltersToolbar extends Component {
    ];
 
    const menu = menuItems.map((item) => (
-     <div className="toolbar-item" key={item.label}>
+     <div className={this.state.activeFilter === item.label?
+                      "toolbar-item toolbar-item-active":"toolbar-item"}
+          key={item.label}>
        <a href="#" data-function={item.label}>{item.label}</a>
      </div>
    ));
@@ -45,31 +43,9 @@ class FiltersToolbar extends Component {
 
  handleImageFilters(e) {
    if (this.props.canvas.hasImage) {
-  //    this.props.hide(); // Close popover
     const filterType = e.target.dataset.function;
-    setVars({canvas: this.props.canvas});
-
-  //   switch (filterType) {
-  //     case "GrayScale":
-  //
-  // //      case "mosaic":
-  // //        setVars({TILE_WIDTH: this.state.tileWidth,
-  // //                 TILE_HEIGHT: this.state.tileHeight,
-  // //                 canvas: this.props.canvas});
-  // //        break;
-  //  //
-  // //      case "retro":
-  // //        setVars({TILE_WIDTH: this.state.retrosize,
-  // //                 TILE_HEIGHT: this.state.retrosize,
-  // //                 canvas: this.props.canvas});
-  // //        break;
-  //  //
-  // //      default:
-  // //        console.log("noop");
-  //   }
-   //
-  //    const effectType = e.target.name;
-     imageProcessor.processImage(filterType);
+    this.setState({activeFilter: filterType});
+    imageProcessor.processImage(filterType);
    }
  }
 }

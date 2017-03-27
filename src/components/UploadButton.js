@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {setVars} from '../utils/sharedVars';
+import { setVars } from '../utils/sharedVars';
 import uploadIcon from '../icons/uploadIcon.svg';
 
 class UploadButton extends Component {

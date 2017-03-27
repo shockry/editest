@@ -14,8 +14,13 @@
   position: relative;
 }
 
-a {
+.toolbar-item a {
   color: #FFFFFF;
+  text-decoration: none;
+}
+
+.toolbar-item-active a {
+  color: #11FFFF;
   text-decoration: none;
 }
 

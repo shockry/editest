@@ -103,18 +103,16 @@ class EffectsToolbar extends Component {
      switch (e.target.name) {
        case "mosaic":
          setVars({TILE_WIDTH: this.state.tileWidth,
-                  TILE_HEIGHT: this.state.tileHeight,
-                  canvas: this.props.canvas});
+                  TILE_HEIGHT: this.state.tileHeight});
          break;
 
        case "retro":
          setVars({TILE_WIDTH: this.state.retrosize,
-                  TILE_HEIGHT: this.state.retrosize,
-                  canvas: this.props.canvas});
+                  TILE_HEIGHT: this.state.retrosize});
          break;
 
        default:
-         console.log("noop");
+         break;
      }
 
      const effectType = e.target.name;

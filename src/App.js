@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './css/App.css';
 import Topbar from './components/Topbar';
+import { setVars } from './utils/sharedVars';
+
 
 class App extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class App extends Component {
 
  componentDidMount() {
    this.setState({canvas: this.canvas});
+   setVars({canvas: this.canvas});
  }
 
   render() {
