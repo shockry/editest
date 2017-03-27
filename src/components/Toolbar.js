@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/Toolbar.css';
 import EffectsToolbar from './EffectsToolbar';
+import FiltersToolbar from './FiltersToolbar';
 
 
 class Toolbar extends Component {
@@ -22,7 +23,9 @@ class Toolbar extends Component {
       Effects: <EffectsToolbar canvas={this.props.canvas}
                                active={this.state.activeToolbarItem}
                                onClick={this.toggleActive}
-                               hide={this.dismissAll}/>
+                               hide={this.dismissAll}/>,
+
+      Filters: <FiltersToolbar canvas={this.props.canvas}/>
     };
 
     const menu = menuItems[this.props.activeMainbarItem];

@@ -22,3 +22,9 @@ a {
 .numberViewer {
   width: 2em;
 }
+
+@media (max-width: 690px) {
+  .toolbar-item>a{
+    font-size: 0.8em;
+  }
+}

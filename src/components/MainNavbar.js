@@ -26,7 +26,7 @@ class MainNavbar extends Component {
       icon: filtersIcon,
       alt: "filters",
       label: "Filters",
-      disabled: true
+      disabled: false
       }
     ];
 
@@ -52,7 +52,7 @@ class MainNavbar extends Component {
   }
 
   activateMenu(e) {
-    const item = e.target.dataset;
+    const item = e.currentTarget.dataset;
     if (item.disabled === "false") {
       this.setState({currentItem: item.label});
     }
