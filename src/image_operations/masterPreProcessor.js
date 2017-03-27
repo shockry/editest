@@ -1,12 +1,12 @@
 import workerFactory from '../utils/workerFactory';
 
-let TILE_WIDTH;
-let TILE_HEIGHT;
-let canvas;
+let TILE_WIDTH, TILE_HEIGHT;
+let canvas, effect;
 
-export function init(originalImage, tileWidth=0, tileHeight=0) {
+export function init(originalImage, effectName='', tileWidth=0, tileHeight=0) {
   TILE_WIDTH = tileWidth;
-  TILE_HEIGHT = tileHeight
+  TILE_HEIGHT = tileHeight;
+  effect = effectName;
 
   canvas = document.createElement('canvas');
   canvas.width = originalImage.naturalWidth;
@@ -64,5 +64,5 @@ function startWorker(worker, part, ctx) {
   const imageData = ctx.getImageData(part.start.x, part.start.y,
                                      part.width, part.height).data;
 
-  worker.postMessage({imageData: imageData.buffer, partData: part}, [imageData.buffer]);
+  worker.postMessage({imageData: imageData.buffer, partData: part, effect}, [imageData.buffer]);
 }

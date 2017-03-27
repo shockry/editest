@@ -1,24 +1,25 @@
-import { init, startPartWorkers } from './masterPreProcessor';
+import { init, startPartWorkers } from '../masterPreProcessor';
 import imageRenderer from './imageRenderer';
-import { shared } from '../utils/sharedVars';
+import { shared } from '../../utils/sharedVars';
 
 
-let TILE_WIDTH, TILE_HEIGHT, originalImage;
 let effect;
+function processImage(effectName) {
+  let TILE_WIDTH, TILE_HEIGHT, originalImage;
 
-function processImage(effectType) {
   [TILE_WIDTH, TILE_HEIGHT, originalImage] =
     [shared.TILE_WIDTH, shared.TILE_HEIGHT, shared.originalImage];
 
-  effect = effectType;
+  effect = effectName;
 
-  init(originalImage, TILE_WIDTH, TILE_HEIGHT);
+  init(originalImage, effect, TILE_WIDTH, TILE_HEIGHT);
 
   const imageWidth = originalImage.naturalWidth;
   const imageHeight = originalImage.naturalHeight;
 
   const tilesAlongHeight = Math.ceil(imageHeight / TILE_HEIGHT);
-  const partCount = Math.min(4, tilesAlongHeight);
+  let partCount = 4;
+  partCount = Math.min(partCount, tilesAlongHeight);
   const tileRowsPerPart = Math.floor(tilesAlongHeight / partCount);
   const partHeight = tileRowsPerPart * TILE_HEIGHT; // In pixels
 

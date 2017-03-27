@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import imagePreprocessor from '../image_operations/imagePreprocessor';
+import imageProcessor from '../image_operations/filters/imageProcessor';
 import {setVars} from '../utils/sharedVars';
 
 
@@ -69,7 +69,7 @@ class FiltersToolbar extends Component {
   //   }
    //
   //    const effectType = e.target.name;
-     imagePreprocessor.processImage(filterType, "filters");
+     imageProcessor.processImage(filterType);
    }
  }
 }
