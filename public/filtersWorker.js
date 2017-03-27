@@ -19,7 +19,7 @@ function applyfilter(partData, imageData, effect) {
       applyfilterToPixel(imageData, pixelIndex);
     }
   }
-  postMessage({imageData, partIndex: partData.partIndex});
+  postMessage({imageData: imageData.buffer, partData}, [imageData.buffer]);
 }
 
 function getFilterFunction(effect) {

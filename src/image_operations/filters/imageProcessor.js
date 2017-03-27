@@ -1,4 +1,5 @@
 import { init, startPartWorkers } from '../masterPreProcessor';
+// import imageRenderer from './imageRenderer';
 import { shared } from '../../utils/sharedVars';
 
 
@@ -16,7 +17,8 @@ function processImage(filterName) {
   const partCount = 4;
   const partHeight = Math.floor(imageHeight/partCount);
 
-  const messageHandler = makeMessageHandler([], partCount, imageWidth, imageHeight);
+  const mosaicData = [];
+  const messageHandler = makeMessageHandler(mosaicData, partCount, imageWidth, imageHeight);
   const workerScript = './filtersWorker.js';
 
   startPartWorkers(imageWidth, imageHeight, partHeight,
@@ -24,17 +26,20 @@ function processImage(filterName) {
 }
 
 function makeMessageHandler(mosaicData=[], partsLeft, imageWidth, imageHeight) {
+  const tempCanvas = document.createElement('canvas');
+  tempCanvas.width = imageWidth;
+  tempCanvas.height = imageHeight;
   return function messageHandler(e) {
     partsLeft--;
-    mosaicData[e.data.partIndex] = e.data.imageData;
+    const dataArray = new Uint8ClampedArray(e.data.imageData);
+    const imageData = new ImageData(dataArray, e.data.partData.width, e.data.partData.height);
+    tempCanvas.getContext('2d').putImageData(imageData, e.data.partData.start.x, e.data.partData.start.y);
     if (partsLeft === 0) { // When all workers have finished, start drawing
-      const resultArray = mosaicData.reduce((a, b) => [...a, ...b]);
-      const dataArray = new Uint8ClampedArray(resultArray);
-      const imageData = new ImageData(dataArray, imageWidth, imageHeight);
-      shared.canvas.getContext('2d').putImageData(imageData, 0, 0);
+      shared.canvas.getContext('2d').drawImage(tempCanvas, 0, 0);
     }
   }
 }
+
 
 export default {
   processImage
