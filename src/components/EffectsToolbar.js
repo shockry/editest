@@ -74,7 +74,7 @@ class EffectsToolbar extends Component {
  }
 
  updateTileDimensions(e) {
-   const value = parseInt(e.target.value, 10);
+   const value = e.target.value;
    const name = e.target.name;
    this.setState((prevState) => {
      if (prevState.sync) {
@@ -90,7 +90,7 @@ class EffectsToolbar extends Component {
    if (e.target.type === "checkbox") {
      value = e.target.checked;
    } else {
-     value = parseInt(e.target.value, 10);
+     value = e.target.value, 10;
    }
    const name = e.target.name;
    this.setState({[name]: value});
@@ -102,13 +102,17 @@ class EffectsToolbar extends Component {
 
      switch (e.target.name) {
        case "mosaic":
-         setVars({TILE_WIDTH: this.state.tileWidth,
-                  TILE_HEIGHT: this.state.tileHeight});
+         setVars({
+                  TILE_WIDTH: parseInt(this.state.tileWidth, 10),
+                  TILE_HEIGHT: parseInt(this.state.tileHeight, 10)
+                });
          break;
 
        case "retro":
-         setVars({TILE_WIDTH: this.state.retrosize,
-                  TILE_HEIGHT: this.state.retrosize});
+         setVars({
+                  TILE_WIDTH: parseInt(this.state.retrosize, 10),
+                  TILE_HEIGHT: parseInt(this.state.retrosize, 10)
+                });
          break;
 
        default:
