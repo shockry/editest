@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './css/App.css';
 import Topbar from './components/Topbar';
 import { setVars } from './utils/sharedVars';
-
+import { setCanvasToBlob } from './utils/canvasToBlob';
 
 class App extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class App extends Component {
 
  componentDidMount() {
    this.setState({canvas: this.canvas});
+   setCanvasToBlob(); // A polyfill for canvas.toBlob if not present
    setVars({canvas: this.canvas});
  }
 
