@@ -8,7 +8,6 @@ import workerFactory from '../utils/workerFactory';
 
 let TILE_WIDTH, TILE_HEIGHT;
 let canvas, effect;
-const workers = [];
 
 export function init(originalImage, effectName='', tileWidth=0, tileHeight=0) {
   // In case we need them to be sent to the workers (price of generic module  ¯\_(ツ)_/¯)

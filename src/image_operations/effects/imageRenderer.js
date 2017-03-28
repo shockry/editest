@@ -2,16 +2,22 @@ import imageHelper from '../../utils/imageHelper';
 import { shared } from '../../utils/sharedVars';
 
 
-let TILE_WIDTH, TILE_HEIGHT, resultCanvas;
+let TILE_WIDTH, TILE_HEIGHT;
 let renderingRow;
-let effect;
+let drawingFunction;
+
+const effectFunctions = {
+  mosaic: drawEllipses,
+  retro: drawRectangles
+};
 
 function renderImage(mosaicData, width, height, effectType, tileDimensions) {
   renderingRow = 0;
   TILE_WIDTH = parseInt(tileDimensions.width, 10);
   TILE_HEIGHT = parseInt(tileDimensions.height, 10);
-  resultCanvas = shared.canvas;
-  effect = effectType;
+  drawingFunction = effectFunctions[effectType];
+
+  const resultCanvas = shared.canvas;
 
   // This is where the image is going to be drawn on the page
   resultCanvas.width = width;
@@ -26,15 +32,14 @@ function renderImage(mosaicData, width, height, effectType, tileDimensions) {
   tmpCanvas.height = TILE_HEIGHT;
   const tmpContext = tmpCanvas.getContext('2d');
 
-  const renderRows = renderTileRows(mosaicData, height, tmpContext,
-                                    resultContext);
-  return renderRows;
+  const result = renderTileRows(mosaicData, height, tmpContext, resultContext);
+
+  return result;
 }
 
 
 /**
  * Draws tile rows to the canvas, one at a time
- * returns a promise that resolves to true when all rows are rendered
  */
 function renderTileRows(data, height, tmpCtx, resultCtx) {
     const tiles = data[renderingRow];
@@ -47,7 +52,6 @@ function renderTileRows(data, height, tmpCtx, resultCtx) {
     renderingRow += TILE_HEIGHT;
 
     if (renderingRow >= height) {
-      renderingRow = 0;
       return ({tmpCtx, resultCtx});
     }
 
@@ -68,24 +72,13 @@ function renderRow(tmpCanvas, resultCtx, tmpCtx, row, col=0) {
 // Draws a tile to the temporary canvas
 function drawTile(color, col, row, tmpCtx) {
   tmpCtx.fillStyle = "#"+imageHelper.rgbToHex(color);
-
-  switch (effect) {
-    case "mosaic":
-      drawEllipses(color, col, row, tmpCtx);
-      break;
-
-    case "retro":
-      drawRectangles(color, col, row, tmpCtx);
-      break;
-
-    default:
-      console.log("noop");
-  }
+  drawingFunction(color, col, row, tmpCtx);
 }
 
 function drawEllipses(color, col, row, tmpCtx) {
   tmpCtx.beginPath();
-  tmpCtx.ellipse(col+(TILE_WIDTH/2), row+(TILE_HEIGHT/2), TILE_WIDTH/2, TILE_HEIGHT/2, 0, 0, Math.PI*2);
+  tmpCtx.ellipse(col+(TILE_WIDTH/2), row+(TILE_HEIGHT/2), TILE_WIDTH/2, TILE_HEIGHT/2,
+                 0, 0, Math.PI*2);
   tmpCtx.closePath();
   tmpCtx.fill();
 }
