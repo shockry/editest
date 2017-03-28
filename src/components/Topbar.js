@@ -8,7 +8,7 @@ class Topbar extends Component {
   render() {
     return (
       <div className="topbar">
-        <UploadButton canvas={this.props.canvas}/>
+        <UploadButton canvas={this.props.canvas} imgElement={this.props.imgElement}/>
         <DownloadButton canvas={this.props.canvas}/>
         <MainNavbar canvas={this.props.canvas}/>
       </div>

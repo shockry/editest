@@ -39,7 +39,7 @@ class UploadButton extends Component {
     if (this.imageInput.files.length === 1 && isImage) {
       const canvas = this.props.canvas;
 
-      const img = new Image();
+      const img = this.props.imgElement;
       img.src = URL.createObjectURL(file);
 
       img.onload = function() {

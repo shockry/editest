@@ -32,7 +32,7 @@ class DownloadButton extends Component {
 
   downloadCanvasBlob(blob) {
     this.imagedownloader.href = URL.createObjectURL(blob);
-    this.imagedownloader.download = "bestest image";
+    this.imagedownloader.download = "bestest image.png";
     this.imagedownloader.click();
   }
 
