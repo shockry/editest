@@ -61,7 +61,7 @@ button > .button-icon {
 }
 
 .hiddenImg {
-  display: none;
+  visibility: hidden;
 }
 
 .preview {
