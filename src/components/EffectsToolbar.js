@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MenuItemWithPopover from './MenuItemWithPopover';
 import imagePreprocessor from '../image_operations/effects/imagePreprocessor';
-import { setVars } from '../utils/sharedVars';
 
 
 class EffectsToolbar extends Component {
@@ -90,7 +89,7 @@ class EffectsToolbar extends Component {
    if (e.target.type === "checkbox") {
      value = e.target.checked;
    } else {
-     value = e.target.value, 10;
+     value = e.target.value;
    }
    const name = e.target.name;
    this.setState({[name]: value});
@@ -100,27 +99,19 @@ class EffectsToolbar extends Component {
    if (this.props.canvas.hasImage) {
      this.props.hide(); // Close popover
 
-     switch (e.target.name) {
-       case "mosaic":
-         setVars({
-                  TILE_WIDTH: parseInt(this.state.tileWidth, 10),
-                  TILE_HEIGHT: parseInt(this.state.tileHeight, 10)
-                });
-         break;
+     const effectType = e.target.name;
 
-       case "retro":
-         setVars({
-                  TILE_WIDTH: parseInt(this.state.retrosize, 10),
-                  TILE_HEIGHT: parseInt(this.state.retrosize, 10)
-                });
-         break;
+     const tileDimensions = {
+              width: this.state.tileWidth,
+              height: this.state.tileHeight
+            };
 
-       default:
-         break;
+     if (effectType === 'retro') {
+       tileDimensions.width = this.state.retrosize;
+       tileDimensions.height = this.state.retrosize;
      }
 
-     const effectType = e.target.name;
-     imagePreprocessor.processImage(effectType);
+     imagePreprocessor.processImage(effectType, tileDimensions);
    }
  }
 }

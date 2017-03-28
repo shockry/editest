@@ -1,12 +1,20 @@
 import workerFactory from '../utils/workerFactory';
 
+/**
+ * This module is a generic pre-processor (or processor, depending on the worker type)
+ * its task is to slice the image into parts and then
+ * spawning some workers to process these parts
+*/
+
 let TILE_WIDTH, TILE_HEIGHT;
 let canvas, effect;
+const workers = [];
 
 export function init(originalImage, effectName='', tileWidth=0, tileHeight=0) {
+  // In case we need them to be sent to the workers (price of generic module  ¯\_(ツ)_/¯)
   TILE_WIDTH = tileWidth;
   TILE_HEIGHT = tileHeight;
-  effect = effectName;
+  effect = effectName; // proposed effect or filter
 
   canvas = document.createElement('canvas');
   canvas.width = originalImage.naturalWidth;

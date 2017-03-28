@@ -6,10 +6,11 @@ let TILE_WIDTH, TILE_HEIGHT, resultCanvas;
 let renderingRow;
 let effect;
 
-function renderImage(mosaicData, width, height, effectType) {
+function renderImage(mosaicData, width, height, effectType, tileDimensions) {
   renderingRow = 0;
-  [TILE_WIDTH, TILE_HEIGHT, resultCanvas] =
-    [shared.TILE_WIDTH, shared.TILE_HEIGHT, shared.canvas]
+  TILE_WIDTH = parseInt(tileDimensions.width, 10);
+  TILE_HEIGHT = parseInt(tileDimensions.height, 10);
+  resultCanvas = shared.canvas;
   effect = effectType;
 
   // This is where the image is going to be drawn on the page
@@ -19,6 +20,7 @@ function renderImage(mosaicData, width, height, effectType) {
 
   // An in-memory canvas to hold each row's tiles.
   // when a complete row is obtained, we draw this canvas to the result canvas
+  // This renders the image incrementally top to bottom
   const tmpCanvas = document.createElement('canvas');
   tmpCanvas.width = width;
   tmpCanvas.height = TILE_HEIGHT;
