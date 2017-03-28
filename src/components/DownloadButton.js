@@ -26,7 +26,7 @@ class DownloadButton extends Component {
 
   downloadImage(e) {
     if (this.props.canvas.hasImage) {
-      this.props.canvas.toBlob(this.downloadCanvasBlob);
+      this.props.canvas.toBlob(this.downloadCanvasBlob, 'image/png');
     }
   }
 
