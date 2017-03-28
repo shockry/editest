@@ -1,8 +1,7 @@
 onmessage = function(e) {
     if (e.data.partData) {
-      const partData = Object.assign({}, e.data.partData);
       const imageData = new Uint8ClampedArray(e.data.imageData);
-      generateTileData(partData, imageData);
+      generateTileData(e.data.partData, imageData);
     }
   };
 
@@ -12,7 +11,7 @@ onmessage = function(e) {
 */
 function generateTileData(partData, imageData) {
   // this object will have an entry for each row of tiles describing its tiles
-  let mosaicData = {};
+  const mosaicData = {};
 
   const tileWidth = partData.tileSize.width;
   const tileHeight = partData.tileSize.height;
@@ -65,9 +64,9 @@ function getAverageColor(y, x, partData, imageData, tileWidth, tileHeight) {
   }
 
   // Calculating the average of each component
-  let r = Math.floor(rgb.r / pixelCount);
-  let g = Math.floor(rgb.g / pixelCount);
-  let b = Math.floor(rgb.b / pixelCount);
+  const r = Math.floor(rgb.r / pixelCount);
+  const g = Math.floor(rgb.g / pixelCount);
+  const b = Math.floor(rgb.b / pixelCount);
 
   return {r, g, b};
 }
