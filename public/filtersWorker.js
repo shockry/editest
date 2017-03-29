@@ -1,9 +1,14 @@
+const effectFunctions = {
+  Negative: invertPixel,
+  GrayScale: grayScalePixel,
+  Sepia: sepiatePixel
+};
+
 onmessage = function(e) {
     if (e.data.partData) {
-      const partData = Object.assign({}, e.data.partData);
       const imageData = new Uint8ClampedArray(e.data.imageData);
       const effect = e.data.effect;
-      applyfilter(partData, imageData, effect);
+      applyfilter(e.data.partData, imageData, effect);
     }
   };
 
@@ -23,16 +28,7 @@ function applyfilter(partData, imageData, effect) {
 }
 
 function getFilterFunction(effect) {
-  switch (effect) {
-    case "Negative":
-      return invertPixel;
-
-    case "GrayScale":
-      return grayScalePixel;
-
-    case "Sepia":
-      return sepiatePixel;
-  }
+  return effectFunctions[effect];
 }
 
 function invertPixel(imageData, pixelIndex) {
@@ -43,11 +39,7 @@ function invertPixel(imageData, pixelIndex) {
 
 // Execuse the names :D
 function grayScalePixel(imageData, pixelIndex) {
-  const r = imageData[pixelIndex];
-  const g = imageData[pixelIndex+1];
-  const b = imageData[pixelIndex+2];
-
-  const average = Math.floor((r+g+b) / 3);
+  const average = getPixelAverageColor(imageData, pixelIndex);
 
   imageData[pixelIndex]  = average;
   imageData[pixelIndex+1]  = average;
@@ -56,13 +48,19 @@ function grayScalePixel(imageData, pixelIndex) {
 
 
 function sepiatePixel(imageData, pixelIndex) {
+  const average = getPixelAverageColor(imageData, pixelIndex);
+
+  imageData[pixelIndex]  = average + 50;
+  imageData[pixelIndex+1]  = average + 30;
+  imageData[pixelIndex+2]  = average;
+}
+
+function getPixelAverageColor(imageData, pixelIndex) {
   const r = imageData[pixelIndex];
   const g = imageData[pixelIndex+1];
   const b = imageData[pixelIndex+2];
 
   const average = Math.floor((r+g+b) / 3);
 
-  imageData[pixelIndex]  = average + 50;
-  imageData[pixelIndex+1]  = average + 30;
-  imageData[pixelIndex+2]  = average;
+  return average;
 }
