@@ -113,4 +113,5 @@ input[type=range]::-moz-range-thumb {
   width: 15px;
   border-radius: 50%;
   margin-top: -7%;
+  cursor: pointer;
 }

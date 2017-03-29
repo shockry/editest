@@ -1,6 +1,7 @@
 import { init, startPartWorkers } from '../masterPreProcessor';
 import imageRenderer from './imageRenderer';
 import { shared } from '../../utils/sharedVars';
+import { getNumberOfThreads } from '../../utils/numberOfThreads';
 
 
 let effect;
@@ -22,7 +23,7 @@ function processImage(effectName, tileDimensions) {
   // a tile basis, not pixels to prevent tile overlapping due to one tile shared
   // between more than one worker
   const tilesAlongHeight = Math.ceil(imageHeight / TILE_HEIGHT);
-  let partCount = window.navigator.hardwareConcurrency || 4;
+  let partCount = getNumberOfThreads();
 
   // this deals with when tiles along the height are less than the intended slices
   partCount = Math.min(partCount, tilesAlongHeight);

@@ -1,6 +1,6 @@
 import { init, startPartWorkers } from '../masterPreProcessor';
 import { shared } from '../../utils/sharedVars';
-
+import { getNumberOfThreads } from '../../utils/numberOfThreads';
 
 let filter;
 function processImage(filterName) {
@@ -13,7 +13,7 @@ function processImage(filterName) {
   const imageWidth = originalImage.naturalWidth;
   const imageHeight = originalImage.naturalHeight;
 
-  const partCount = 4;
+  const partCount = getNumberOfThreads();
   const partHeight = Math.floor(imageHeight/partCount);
 
   const mosaicData = [];
