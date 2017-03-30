@@ -36,6 +36,7 @@ function makeMessageHandler(mosaicData=[], partsLeft,
     partsLeft--;
     drawToTempCanvas(tempCanvas, e.data)
     if (partsLeft === 0) { // When all workers have finished, draw
+      shared.canvas.getContext('2d').clearRect(0, 0, imageWidth, imageHeight)
       shared.canvas.getContext('2d').drawImage(tempCanvas, 0, 0);
     }
   }
