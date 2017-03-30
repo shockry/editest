@@ -2,6 +2,7 @@ import { init, startPartWorkers } from '../masterPreProcessor';
 import imageRenderer from './imageRenderer';
 import { shared } from '../../utils/sharedVars';
 import { getNumberOfThreads } from '../../utils/numberOfThreads';
+import { getWorkersPublicPath } from '../../utils/workersPublicPath';
 
 
 let effect;
@@ -33,7 +34,7 @@ function processImage(effectName, tileDimensions) {
   const messageHandler = makeMessageHandler({}, partCount, imageWidth,
                                             imageHeight, tileDimensions);
 
-  const workerScript = './averageColorsWorker.js';
+  const workerScript = getWorkersPublicPath() + '/averageColorsWorker.js';
 
   startPartWorkers(imageWidth, imageHeight, partHeight,
                                partCount, messageHandler, workerScript);

@@ -1,6 +1,8 @@
 import { init, startPartWorkers } from '../masterPreProcessor';
 import { shared } from '../../utils/sharedVars';
 import { getNumberOfThreads } from '../../utils/numberOfThreads';
+import { getWorkersPublicPath } from '../../utils/workersPublicPath';
+
 
 let filter;
 function processImage(filterName) {
@@ -22,7 +24,7 @@ function processImage(filterName) {
   tempCanvas.height = imageHeight;
   const messageHandler = makeMessageHandler(mosaicData, partCount,
                                             imageWidth, imageHeight, tempCanvas);
-  const workerScript = './filtersWorker.js';
+  const workerScript = getWorkersPublicPath() + '/filtersWorker.js';
 
   startPartWorkers(imageWidth, imageHeight, partHeight,
                                partCount, messageHandler, workerScript);
