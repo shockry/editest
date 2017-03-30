@@ -16,7 +16,7 @@ class FiltersToolbar extends Component {
  render() {
    const menuItems = [
      {
-       label: "GrayScale",
+       label: "Grayscale",
        functionality: "GrayScale"
      },
      {
