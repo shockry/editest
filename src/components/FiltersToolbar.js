@@ -44,8 +44,10 @@ class FiltersToolbar extends Component {
  handleImageFilters(e) {
    if (this.props.canvas.hasImage) {
     const filterType = e.target.dataset.function;
-    this.setState({activeFilter: filterType});
-    imageProcessor.processImage(filterType);
+    if (filterType) {
+      this.setState({activeFilter: filterType});
+      imageProcessor.processImage(filterType);
+    }
    }
  }
 }
