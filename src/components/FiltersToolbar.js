@@ -10,7 +10,7 @@ class FiltersToolbar extends Component {
 
    this.state = {
      activeFilter: null
-   }
+   };
  }
 
  render() {

@@ -31,7 +31,7 @@ function processImage(effectName, tileDimensions) {
   const tileRowsPerPart = Math.floor(tilesAlongHeight / partCount);
   const partHeight = tileRowsPerPart * TILE_HEIGHT; // In pixels
 
-  const messageHandler = makeMessageHandler({}, partCount, imageWidth,
+  const messageHandler = makeMessageHandler(partCount, imageWidth,
                                             imageHeight, tileDimensions);
 
   const workerScript = getWorkersPublicPath() + '/averageColorsWorker.js';
@@ -40,8 +40,8 @@ function processImage(effectName, tileDimensions) {
                                partCount, messageHandler, workerScript);
 }
 
-function makeMessageHandler(mosaicData={}, partsLeft, imageWidth,
-                            imageHeight, tileDimensions) {
+function makeMessageHandler(partsLeft, imageWidth,
+                            imageHeight, tileDimensions, mosaicData={}) {
   return function messageHandler(e) {
     Object.assign(mosaicData, e.data);
     partsLeft--;

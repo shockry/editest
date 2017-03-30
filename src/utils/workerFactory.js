@@ -6,4 +6,4 @@ function buildWorker(scriptSource, messageHandler) {
 
 export default {
   buildWorker
-}
+};

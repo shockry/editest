@@ -18,11 +18,10 @@ function processImage(filterName) {
   const partCount = getNumberOfThreads();
   const partHeight = Math.floor(imageHeight/partCount);
 
-  const mosaicData = [];
   const tempCanvas = document.createElement('canvas');
   tempCanvas.width = imageWidth;
   tempCanvas.height = imageHeight;
-  const messageHandler = makeMessageHandler(mosaicData, partCount,
+  const messageHandler = makeMessageHandler(partCount,
                                             imageWidth, imageHeight, tempCanvas);
   const workerScript = getWorkersPublicPath() + '/filtersWorker.js';
 
@@ -30,13 +29,13 @@ function processImage(filterName) {
                                partCount, messageHandler, workerScript);
 }
 
-function makeMessageHandler(mosaicData=[], partsLeft,
-                            imageWidth, imageHeight, tempCanvas) {
+function makeMessageHandler(partsLeft,
+                            imageWidth, imageHeight, tempCanvas, mosaicData=[]) {
   return function messageHandler(e) {
     partsLeft--;
-    drawToTempCanvas(tempCanvas, e.data)
+    drawToTempCanvas(tempCanvas, e.data);
     if (partsLeft === 0) { // When all workers have finished, draw
-      shared.canvas.getContext('2d').clearRect(0, 0, imageWidth, imageHeight)
+      shared.canvas.getContext('2d').clearRect(0, 0, imageWidth, imageHeight);
       shared.canvas.getContext('2d').drawImage(tempCanvas, 0, 0);
     }
   }
