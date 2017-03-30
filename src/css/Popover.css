@@ -7,9 +7,10 @@
   top: 35px;
   font-size: 0.7em;
   opacity: 0;
-  transition: opacity 0.3s ease, z-index 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   box-shadow: 1px 1px 6px #000000;
-  z-index: 0;
+  z-index: 10;
+  visibility: hidden;
 }
 
 .popover::before {
@@ -24,7 +25,7 @@
 
 .popover-active {
   opacity: 1;
-  z-index: 10;
+  visibility: visible;
 }
 
 .popover input {
