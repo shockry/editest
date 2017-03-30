@@ -44,7 +44,7 @@ class EffectsToolbar extends Component {
        </div>
      },
      {
-       label: "Retro",
+       label: "Pixelate",
        content:
        <div className="popover-form">
          <div>

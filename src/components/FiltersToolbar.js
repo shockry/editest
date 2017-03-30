@@ -16,21 +16,24 @@ class FiltersToolbar extends Component {
  render() {
    const menuItems = [
      {
-       label: "GrayScale"
+       label: "GrayScale",
+       functionality: "GrayScale"
      },
      {
-       label: "Sepia"
+       label: "Sepia",
+       functionality: "Sepia"
      },
      {
-       label: "Negative"
+       label: "Negative",
+       functionality: "Negative"
      }
    ];
 
    const menu = menuItems.map((item) => (
-     <div className={this.state.activeFilter === item.label?
+     <div className={this.state.activeFilter === item.functionality?
                       "toolbar-item toolbar-item-active":"toolbar-item"}
           key={item.label}>
-       <a href="#" data-function={item.label}>{item.label}</a>
+       <a href="#" data-function={item.functionality}>{item.label}</a>
      </div>
    ));
 
