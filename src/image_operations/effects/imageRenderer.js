@@ -71,20 +71,22 @@ function renderRow(tmpCanvas, resultCtx, tmpCtx, row, col=0) {
 
 // Draws a tile to the temporary canvas
 function drawTile(color, col, row, tmpCtx) {
-  tmpCtx.fillStyle = "#"+imageHelper.rgbToHex(color);
-  drawingFunction(color, col, row, tmpCtx);
+  if (color.a > 0) { //Don't draw transparent areas
+    tmpCtx.fillStyle = "#"+imageHelper.rgbToHex(color);
+    drawingFunction(col, row, tmpCtx);
+  }
 }
 
-function drawEllipses(color, col, row, tmpCtx) {
-  tmpCtx.beginPath();
-  tmpCtx.ellipse(col+(TILE_WIDTH/2), row+(TILE_HEIGHT/2), TILE_WIDTH/2, TILE_HEIGHT/2,
-                 0, 0, Math.PI*2);
-  tmpCtx.closePath();
-  tmpCtx.fill();
+function drawEllipses(col, row, tmpCtx) {
+    tmpCtx.beginPath();
+    tmpCtx.ellipse(col+(TILE_WIDTH/2), row+(TILE_HEIGHT/2), TILE_WIDTH/2, TILE_HEIGHT/2,
+                   0, 0, Math.PI*2);
+    tmpCtx.closePath();
+    tmpCtx.fill();
 }
 
-function drawRectangles(color, col, row, tmpCtx) {
-  tmpCtx.fillRect(col, row, TILE_WIDTH, TILE_HEIGHT);
+function drawRectangles(col, row, tmpCtx) {
+    tmpCtx.fillRect(col, row, TILE_WIDTH, TILE_HEIGHT);
 }
 
 export default {

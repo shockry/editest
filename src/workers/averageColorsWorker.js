@@ -35,7 +35,7 @@ function generateTileData(partData, imageData) {
 
 // Gets the average color of a tile at a specific position in the source image
 function getAverageColor(y, x, partData, imageData, tileWidth, tileHeight) {
-  const rgb = {r:0, g:0, b:0};
+  const rgb = {r:0, g:0, b:0, a:0};
 
   let pixelCount = 0;
 
@@ -56,10 +56,11 @@ function getAverageColor(y, x, partData, imageData, tileWidth, tileHeight) {
     for (let j=xStart; j<xEnd && j<partData.width; j++) {
       // The index of this pixel in the imageData array
       const pixelIndex = ((i*partData.width) + j) * 4;
-      rgb.r += imageData[pixelIndex];
-      rgb.g += imageData[pixelIndex+1];
-      rgb.b += imageData[pixelIndex+2];
-      pixelCount++;
+        rgb.r += imageData[pixelIndex];
+        rgb.g += imageData[pixelIndex+1];
+        rgb.b += imageData[pixelIndex+2];
+        rgb.a += imageData[pixelIndex+3];
+        pixelCount++;
     }
   }
 
@@ -67,6 +68,7 @@ function getAverageColor(y, x, partData, imageData, tileWidth, tileHeight) {
   const r = Math.floor(rgb.r / pixelCount);
   const g = Math.floor(rgb.g / pixelCount);
   const b = Math.floor(rgb.b / pixelCount);
+  const a = Math.floor(rgb.a / pixelCount);
 
-  return {r, g, b};
+  return {r, g, b, a};
 }
