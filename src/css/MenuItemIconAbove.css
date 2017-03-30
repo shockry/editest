@@ -16,6 +16,7 @@
 
 .menu-item-icon {
   display: block;
+  margin: auto;
 }
 
 @media (max-width: 690px) {
