@@ -72,7 +72,7 @@ function renderRow(tmpCanvas, resultCtx, tmpCtx, row, col=0) {
 // Draws a tile to the temporary canvas
 function drawTile(color, col, row, tmpCtx) {
   if (color.a > 0) { //Don't draw transparent areas
-    tmpCtx.fillStyle = "#"+imageHelper.rgbToHex(color);
+    tmpCtx.fillStyle = imageHelper.getRGBA(color);
     drawingFunction(col, row, tmpCtx);
   }
 }

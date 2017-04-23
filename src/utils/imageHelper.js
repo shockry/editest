@@ -10,7 +10,13 @@ function rgbToHex(rgb) {
   return `${r}${g}${b}`;
 }
 
+function getRGBA(rgba) {
+  const color = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
+  return color;
+}
+
 export default {
   rgbToHex,
-  hex
+  hex,
+  getRGBA
 };
