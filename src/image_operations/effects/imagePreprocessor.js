@@ -1,18 +1,16 @@
 import { init, startPartWorkers } from '../masterPreProcessor';
 import imageRenderer from './imageRenderer';
-import { shared } from '../../utils/sharedVars';
 import { getNumberOfThreads } from '../../utils/numberOfThreads';
 import { getWorkersPublicPath } from '../../utils/workersPublicPath';
 
 
 let effect;
 
-function processImage(effectName, tileDimensions) {
+function processImage(effectName, tileDimensions, canvas, originalImage) {
   // The effects have to divide the image into tiles which
   // come together to draw the result image
   const TILE_WIDTH = parseInt(tileDimensions.width, 10);
   const TILE_HEIGHT = parseInt(tileDimensions.height, 10);
-  const originalImage = shared.originalImage;
   effect = effectName;
 
   init(originalImage, effect, TILE_WIDTH, TILE_HEIGHT);
@@ -32,7 +30,7 @@ function processImage(effectName, tileDimensions) {
   const partHeight = tileRowsPerPart * TILE_HEIGHT; // In pixels
 
   const messageHandler = makeMessageHandler(partCount, imageWidth,
-                                            imageHeight, tileDimensions);
+                                            imageHeight, tileDimensions, canvas);
 
   const workerScript = getWorkersPublicPath() + '/averageColorsWorker.js';
 
@@ -41,13 +39,13 @@ function processImage(effectName, tileDimensions) {
 }
 
 function makeMessageHandler(partsLeft, imageWidth,
-                            imageHeight, tileDimensions, mosaicData={}) {
+                            imageHeight, tileDimensions, canvas, mosaicData={}) {
   return function messageHandler(e) {
     Object.assign(mosaicData, e.data);
     partsLeft--;
     if (partsLeft === 0) { // When all workers have finished, start drawing
       return imageRenderer.renderImage(mosaicData, imageWidth,
-                                       imageHeight, effect, tileDimensions);
+                                       imageHeight, effect, tileDimensions, canvas);
     }
   }
 }

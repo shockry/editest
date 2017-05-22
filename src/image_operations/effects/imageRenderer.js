@@ -1,5 +1,4 @@
 import imageHelper from '../../utils/imageHelper';
-import { shared } from '../../utils/sharedVars';
 
 
 let TILE_WIDTH, TILE_HEIGHT;
@@ -11,13 +10,11 @@ const effectFunctions = {
   retro: drawRectangles
 };
 
-function renderImage(mosaicData, width, height, effectType, tileDimensions) {
+function renderImage(mosaicData, width, height, effectType, tileDimensions, resultCanvas) {
   renderingRow = 0;
   TILE_WIDTH = parseInt(tileDimensions.width, 10);
   TILE_HEIGHT = parseInt(tileDimensions.height, 10);
   drawingFunction = effectFunctions[effectType];
-
-  const resultCanvas = shared.canvas;
 
   // This is where the image is going to be drawn on the page
   resultCanvas.width = width;

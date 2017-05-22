@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './css/App.css';
 import Topbar from './components/Topbar';
-import { setVars } from './utils/sharedVars';
 import { setCanvasToBlob } from './utils/canvasToBlob';
 
 class App extends Component {
@@ -19,7 +18,6 @@ class App extends Component {
  componentDidMount() {
    this.setState({canvas: this.canvas, originalImage: this.originalImage});
    setCanvasToBlob(); // A polyfill for canvas.toBlob if not present
-   setVars({canvas: this.canvas});
  }
 
   render() {

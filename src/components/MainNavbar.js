@@ -46,6 +46,7 @@ class MainNavbar extends Component {
           {menu}
         </div>
         <Toolbar canvas={this.props.canvas}
+          originalImage={this.props.originalImage}
           activeMainbarItem={this.state.currentItem}/>
       </div>
     );

@@ -111,7 +111,7 @@ class EffectsToolbar extends Component {
        tileDimensions.height = this.state.retrosize;
      }
 
-     imagePreprocessor.processImage(effectType, tileDimensions);
+     imagePreprocessor.processImage(effectType, tileDimensions, this.props.canvas, this.props.originalImage);
    }
  }
 }

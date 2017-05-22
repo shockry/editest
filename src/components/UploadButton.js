@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { setVars } from '../utils/sharedVars';
 import uploadIcon from '../icons/uploadIcon.svg';
 
 class UploadButton extends Component {
@@ -38,6 +37,7 @@ class UploadButton extends Component {
 
     if (this.imageInput.files.length === 1 && isImage) {
       const canvas = this.props.canvas;
+      const setOriginalImage = this.props.setOriginalImage;
 
       const img = this.props.imgElement;
       img.src = URL.createObjectURL(file);
@@ -49,7 +49,7 @@ class UploadButton extends Component {
         canvas.getContext('2d').drawImage(this, 0, 0);
         canvas.hasImage = true;
 
-        setVars({originalImage: this});
+        setOriginalImage(this);
       };
     }
   }

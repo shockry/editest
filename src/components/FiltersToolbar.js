@@ -49,7 +49,7 @@ class FiltersToolbar extends Component {
     const filterType = e.target.dataset.function;
     if (filterType) {
       this.setState({activeFilter: filterType});
-      imageProcessor.processImage(filterType);
+      imageProcessor.processImage(filterType, this.props.originalImage, this.props.canvas);
     }
    }
  }

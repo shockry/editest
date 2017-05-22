@@ -21,11 +21,12 @@ class Toolbar extends Component {
     // own functionality details
     const menuItems = {
       Effects: <EffectsToolbar canvas={this.props.canvas}
+                               originalImage={this.props.originalImage}
                                active={this.state.activeToolbarItem}
                                onClick={this.toggleActive}
                                hide={this.dismissAll}/>,
 
-      Filters: <FiltersToolbar canvas={this.props.canvas}/>
+      Filters: <FiltersToolbar canvas={this.props.canvas} originalImage={this.props.originalImage}/>
     };
 
     const menu = menuItems[this.props.activeMainbarItem];

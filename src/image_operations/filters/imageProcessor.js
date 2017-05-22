@@ -1,13 +1,10 @@
 import { init, startPartWorkers } from '../masterPreProcessor';
-import { shared } from '../../utils/sharedVars';
 import { getNumberOfThreads } from '../../utils/numberOfThreads';
 import { getWorkersPublicPath } from '../../utils/workersPublicPath';
 
 
 let filter;
-function processImage(filterName) {
-  const originalImage = shared.originalImage;
-
+function processImage(filterName, originalImage, resultCanvas) {
   filter = filterName;
 
   init(originalImage, filter);
@@ -22,7 +19,7 @@ function processImage(filterName) {
   tempCanvas.width = imageWidth;
   tempCanvas.height = imageHeight;
   const messageHandler = makeMessageHandler(partCount,
-                                            imageWidth, imageHeight, tempCanvas);
+                                            imageWidth, imageHeight, tempCanvas, resultCanvas);
   const workerScript = getWorkersPublicPath() + '/filtersWorker.js';
 
   startPartWorkers(imageWidth, imageHeight, partHeight,
@@ -30,13 +27,13 @@ function processImage(filterName) {
 }
 
 function makeMessageHandler(partsLeft,
-                            imageWidth, imageHeight, tempCanvas, mosaicData=[]) {
+                            imageWidth, imageHeight, tempCanvas, resultCanvas, mosaicData=[]) {
   return function messageHandler(e) {
     partsLeft--;
     drawToTempCanvas(tempCanvas, e.data);
     if (partsLeft === 0) { // When all workers have finished, draw
-      shared.canvas.getContext('2d').clearRect(0, 0, imageWidth, imageHeight);
-      shared.canvas.getContext('2d').drawImage(tempCanvas, 0, 0);
+      resultCanvas.getContext('2d').clearRect(0, 0, imageWidth, imageHeight);
+      resultCanvas.getContext('2d').drawImage(tempCanvas, 0, 0);
     }
   }
 }
